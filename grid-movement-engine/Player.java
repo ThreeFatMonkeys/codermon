@@ -37,11 +37,6 @@ public class Player extends GameObject
         {
             control();
         }
-        
-        if(Greenfoot.isKeyDown("h"))
-        {
-            setLocation(int x, int y);
-        }
     }    
     
     public void control()
@@ -150,11 +145,5 @@ public class Player extends GameObject
                 walking = false;
             }
         }  
-    }
-    
-    public void setLocation(int x, int y)
-    {
-        x = 500;
-        y = 500;
     }
 }
