@@ -8,9 +8,7 @@ public class Player extends GameObject
     
     int direction;
     
-    int walk, walkSpeed;
-    
-    int gridSize, gridX, gridY;
+    int walkSpeed, walkDistance;
     
     public Player()
     {
@@ -23,8 +21,8 @@ public class Player extends GameObject
         
         gridSize = 32;
         
-        walk = 0;
-        walkSpeed = 32;
+        walkSpeed = 5;
+        walkDistance = 0;
     }
 
     public void act() 
@@ -39,6 +37,34 @@ public class Player extends GameObject
         }
     }    
     
+    public boolean canWalk(int direction)
+    {
+        Solid hit;
+        switch(direction)
+        {
+        case 270:
+            hit = (Solid) getOneObjectAtOffset(0, -gridSize, Solid.class);
+            break;
+        case 90:
+            hit = (Solid) getOneObjectAtOffset(0, gridSize, Solid.class);
+            break;
+        case 180:
+            hit = (Solid) getOneObjectAtOffset(-gridSize, 0, Solid.class);
+            break;
+        case 0:
+            hit = (Solid) getOneObjectAtOffset(gridSize, 0, Solid.class);
+            break;
+        default:
+            return false;
+        }
+        
+        if(hit != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    
     public void control()
     {
         gridX = (getX() - (gridSize/2))/gridSize;
@@ -50,7 +76,7 @@ public class Player extends GameObject
             {
                 gridY--;
                 direction = 270;
-                walking = true;
+                walking = canWalk(270);
             }
             else
             {
@@ -63,7 +89,7 @@ public class Player extends GameObject
             {
                 gridY++;
                 direction = 90;
-                walking = true;
+                walking = canWalk(90);
             }
             else
             {
@@ -76,7 +102,7 @@ public class Player extends GameObject
             {
                 gridX--;
                 direction = 180;
-                walking = true;
+                walking = canWalk(180);
             }
             else
             {
@@ -89,7 +115,7 @@ public class Player extends GameObject
             {
                 gridX++;
                 direction = 0;
-                walking = true;
+                walking = canWalk(0);
             }
             else
             {
@@ -100,7 +126,6 @@ public class Player extends GameObject
     
     public void movement()
     {
-        walk += walkSpeed;
         if(getImage() == upI)
         {
             setRotation(direction);
@@ -110,6 +135,7 @@ public class Player extends GameObject
             {
                 setLocation(getX(), (gridY * gridSize) + gridSize/2);
                 walking = false;
+                walkDistance += 1;
             }
         }
         else if(getImage() == downI)
@@ -121,6 +147,7 @@ public class Player extends GameObject
             {
                 setLocation(getX(), (gridY * gridSize) + gridSize/2);
                 walking = false;
+                walkDistance += 1;
             }
         }
         else if(getImage() == leftI)
@@ -132,6 +159,7 @@ public class Player extends GameObject
             {
                 setLocation((gridX * gridSize) + gridSize/2, getY());
                 walking = false;
+                walkDistance += 1;
             }
         }
         else if(getImage() == rightI)
@@ -143,6 +171,7 @@ public class Player extends GameObject
             {
                 setLocation((gridX * gridSize) + gridSize/2, getY());
                 walking = false;
+                walkDistance += 1;
             }
         }  
     }

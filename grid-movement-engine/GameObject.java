@@ -1,19 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class GameObject here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class GameObject extends Actor
 {
-    /**
-     * Act - do whatever the GameObject wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
+    int gridSize, gridX, gridY;
+    
+    public GameObject()
     {
-        // Add your action code here.
-    }    
+        gridSize = 32;
+    }
+    
+    public GameObject(int x, int y)
+    {
+        gridSize = 32;
+        gridX = x;
+        gridY = y;
+    }
 }

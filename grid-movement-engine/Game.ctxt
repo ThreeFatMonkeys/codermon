@@ -1,4 +1,6 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Game()
-numComments=1
+comment1.params=coord
+comment1.target=int\ grid(int)
+numComments=2
